@@ -1,6 +1,7 @@
 package com.milewskiarkadiuszmodul8.asmilewskiModul8;
 
 public class Rectangle {
+
     private double height;
     private double width;
 
@@ -26,8 +27,10 @@ public class Rectangle {
         setPositionY(positionY + y);
     };
     public boolean containsPoint(Point p) {
-        return p.getX() >= positionX && p.getX() <= positionX + width &&
-                p.getY() >= positionY && p.getY() <= positionY + height;
+        return  p.getX() <= (width / 2) &&
+                p.getX() >=  (width / 2) - width &&
+                p.getY() <= height / 2  &&
+                p.getY() >= (height / 2 ) - height;
     }
     public double getHeight() {
         return height;
@@ -62,10 +65,38 @@ public class Rectangle {
         this.positionY = positionY;
     }
 
+    @Override
+    public boolean equals(Object o ) {
+        if (this == o) return true;
+        if( o == null || getClass() != o.getClass()) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return rectangle.height == height &&
+                rectangle.width == width &&
+                positionX == rectangle.getPositionX() &&
+                positionY == rectangle.getPositionY();
+    }
 
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "height=" + height +
+                ", width=" + width +
+                ", positionX=" + positionX +
+                ", positionY=" + positionY +
+                '}';
+    }
 
+    public static class TestRectangle {
+        public static void main(String[] args) {
+            Rectangle rectangle1 = new Rectangle(10, 10, 4, 5);
+            System.out.println(rectangle1);
 
+            Rectangle rectangle2 = new Rectangle(5, 10, 20, 30);
+            System.out.println(rectangle2);
 
-
+            rectangle1.move(5, 5);
+            System.out.println(rectangle1.containsPoint(new Point(4, 0)));
+        }
+    }
 }
 
