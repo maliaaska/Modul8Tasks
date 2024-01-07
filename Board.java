@@ -34,7 +34,7 @@ public class Board {
     }
 
     private boolean isMoveValid(int row, int col) {
-        return row >= 0 && row < size && col >= 0 && col < size && board[row][col] == '-';
+        return row >= 0 && row < size && col >= 0 && col < size && board[row][col] == '-'; // Sprawdzanie czy pole nie zostało wczesniej już użyte.
     }
 
     private boolean checkForWin() {
@@ -50,7 +50,14 @@ public class Board {
 
         return false;
     }
-
+    private boolean isBoardFull() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == '-') return false;
+            }
+        }
+        return true;
+    }
     public void game() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -79,14 +86,7 @@ public class Board {
         }
     }
 
-    private boolean isBoardFull() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (board[i][j] == '-') return false;
-            }
-        }
-        return true;
-    }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
